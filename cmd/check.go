@@ -59,14 +59,14 @@ func Request(Url string) (*http.Response, error) {
 	str := "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url="
 
 	u, _ := url.Parse(str)
-	fmt.Println("original:", u)
+	//fmt.Println("original:", u)
 	q, _ := url.ParseQuery(u.RawQuery)
 	q.Add("strategy", "MOBILE")
 	q.Add("category", "PERFORMANCE")
 
 	u.RawQuery = q.Encode()
 
-	fmt.Println("modified:", u)
+	//fmt.Println("modified:", u)
 
 	ApiKey := "AIzaSyB5HqcLm-6widAtJAzc2S-Q09DyUMvXy-g"
 	req, err := http.NewRequest("GET", str+Url+"&key="+ApiKey+"&strategy=mobile&category=seo&category=best-practices&category=accessibility&category=performance", nil)
@@ -127,13 +127,7 @@ func check(domain string) {
 // checkCmd represents the check command
 var checkCmd = &cobra.Command{
 	Use:   "check",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Run a check on a specified domain name using the -u flag",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("check called")
 		check(urlPath)

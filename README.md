@@ -11,7 +11,7 @@ from websites using the PageSpeed Insights API & Lighthouse Scores from Google.
 ### `vitals [command]`
 
 #### `vitals check  -u`
-Retrieve lighthouse informations on the specified domain name
+Retrieve lighthouse information on the specified domain name
 
 
 For example:
