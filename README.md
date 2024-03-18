@@ -28,9 +28,3 @@ Lighthouse Best Practices Score: 1
 Lighthouse Performance Score: 1
 Lighthouse Accessibility Score: 0.92
 ```
-
-
-## Contributing
-
-Contributions are always welcome!
-
