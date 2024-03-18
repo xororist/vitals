@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 Hugo Cachon <hugo.cachon@hetic.net>
-
-*/
 package cmd
 
 import (
@@ -59,19 +55,18 @@ func Request(Url string) (*http.Response, error) {
 	str := "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url="
 
 	u, _ := url.Parse(str)
-	//fmt.Println("original:", u)
 	q, _ := url.ParseQuery(u.RawQuery)
+	
 	q.Add("strategy", "MOBILE")
 	q.Add("category", "PERFORMANCE")
 
 	u.RawQuery = q.Encode()
-
-	//fmt.Println("modified:", u)
-
+	
 	ApiKey := "AIzaSyB5HqcLm-6widAtJAzc2S-Q09DyUMvXy-g"
+	
 	req, err := http.NewRequest("GET", str+Url+"&key="+ApiKey+"&strategy=mobile&category=seo&category=best-practices&category=accessibility&category=performance", nil)
 	response, err := client.Do(req)
-
+	
 	return response, err
 }
 
@@ -124,7 +119,6 @@ func check(domain string) {
 	fmt.Printf("Lighthouse Accessibility Score: %v\n", responseObject.LighthouseResult.Categories.Accessibility.Score)
 }
 
-// checkCmd represents the check command
 var checkCmd = &cobra.Command{
 	Use:   "check",
 	Short: "Run a check on a specified domain name using the -u flag",
@@ -136,17 +130,8 @@ var checkCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(checkCmd)
-
-	// Here you will define your flags and configuration settings.
 	checkCmd.Flags().StringVarP(&urlPath, "url", "u", "", "The url to check")
 	if err := checkCmd.MarkFlagRequired("url"); err != nil {
 		fmt.Println(err)
 	}
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// checkCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// checkCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
